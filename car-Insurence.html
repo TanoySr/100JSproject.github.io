@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap-material-design.min.css" integrity="sha384-R80DC0KVBO4GSTw+wZ5x2zn2pu4POSErBkf8/fSFhPXHxvHJydT0CSgAP2Yo2r4I" crossorigin="anonymous">
+    <style type="text/css">
+    	body {
+    background: #e96443;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2a05f8, #f84710);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2a05f8, #f84710); 
+}
+.btn.btn-raised.btn-primary {
+    background-color: #f84710!important;
+    font-size: 16px;
+    width: 100%;
+    padding: 15px;
+}
+header {
+    background-color:#f84710;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
+header h1 {
+    font-size: 22px;
+    margin:0;
+}
+.error {
+    background-color: #FBE9E7;
+    border: 1px solid #F4511E;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #F4511E;
+}
+.error p {
+    margin:0;
+}
+#content {
+    margin-top: 60px;
+    background-color: white;
+    -webkit-box-shadow: 0px 21px 46px -15px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 21px 46px -15px rgba(0,0,0,1);
+    box-shadow: 0px 21px 46px -15px rgba(0,0,0,1);
+}
+.content-form {
+    margin-top: 30px;
+}
+#loading img {
+    display: none;
+    margin: 0 auto;
+}
+#result  {
+    margin-bottom: 40px;
+}
+#result div {
+    border: 1px solid #26C6DA;
+    text-align: center;
+    padding: 0  0 20px 0;
+}
+#result div p {
+    margin-bottom: 0;
+}
+#result div p.header {
+    background-color: #26C6DA;
+    margin-bottom: 10px;
+    color:white;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+    </style>
+    <title>Car Insurance Quote Online</title>
+  </head>
+  <body>
+<div class="container">
+  <div class="row">
+    <div class="col col-md-8 mr-md-auto ml-md-auto" >
+      <div id="content">
+            <header>
+                    <h1 class="text-center text-dark">Car Insurance Quote Online</h1>
+            </header>
+            <div class="row content-form">
+                <div class="col col-md-10 mr-md-auto ml-md-auto">
+                  <form action="#" id="request-quote">
+                              
+                                <div class="form-group">
+                                    <label for="make">Make:</label>
+                                    <select class="form-control" id="make">
+                                        <option value="">- Select -</option>
+                                        <option value="1">Bugati Veyron</option>
+                                        <option value="2">Lamborghini</option>
+                                        <option value="3">Audi</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                        <label for="year">Year:</label>
+                                        <select class="form-control" id="year"></select>
+                                </div>
+                                <fieldset class="form-group">
+                                    <div class="row">
+                                         <legend class="col-form-legend col-12">Level</legend>
+
+                                      <div class="col12">
+                                          <div class="form-check">
+                                            <label class="form-check-label">
+                                              <input  class="form-check-input" type="radio" name="level" value="basic" checked>
+                                              Basic
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                              <input class="form-check-input" type="radio" name="level" value="complete">
+                                              Complete
+                                            </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                              </fieldset>
+
+                          <div id="loading">
+                              <img src="https://cdn.clipart.email/e15a53c256034173e805021fcdd9f5d3_library-of-animated-graphic-royalty-free-library-circles-png-files-_220-220.gif">
+                          </div>
+                          <div id="result"></div>
+                          <div class="form-group">
+                                  <button type="submit" class="btn btn-raised btn-primary">Get Quote
+                                  </button>
+                          </div>
+                  </form> 
+                </div>
+          </div>
+      </div> <!--#content-->
+    </div>
+  </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="js/bootstrap-material-design.js" integrity="sha384-3xciOSDAlaXneEmyOo0ME/2grfpqzhhTcM4cE32Ce9+8DW/04AGoTACzQpphYGYe" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script>
+    	//Variables
+const form =document.getElementById('request-quote');
+const html= new HTMLUI();
+
+//Event Listeners
+EventListeners();
+
+function EventListeners(){
+    document.addEventListener('DOMContentLoaded',function(){
+        // console.log("Hello World");
+        html.displayYears();
+    });
+    
+    form.addEventListener('submit',function(e){
+        e.preventDefault();
+
+        // Reading selected values from the form
+        const make=document.getElementById('make').value;
+        const year=document.getElementById('year').value;
+
+        //REading value from radio button
+        const level = document.querySelector('input[name="level"]:checked').value;
+
+        //Validating whether there is input or not
+        if(make==="" || year === "" || level === ""){
+            console.log("error sent");
+            html.displayError('All Fields are empty...')
+        }
+        else{
+            //to remove existing div
+            const prevResult=document.querySelector('#result div');
+            if(prevResult!=null){
+                prevResult.remove();
+            } 
+
+            //Creating and printing insurance
+            // console.log(" "+make+" "+year+" "+level);           
+            const insurance= new Insurance(make,year,level);
+            const price = insurance.calculateQuote(insurance);
+
+            // printing the result in html
+            html.showResults(price,insurance);
+        }
+    });
+    
+}
+function Insurance(make,year,level) {
+    this.make=make;
+    this.level=level;
+    this.year=year;
+}
+Insurance.prototype.calculateQuote= function(insurance){
+    // console.log(insurance);
+    let price;
+    const base=2000;
+
+    const make=insurance.make;
+     /*1=Bugati Veyron 30%
+        2=Lamborghini   20%
+        3=Audi  10%
+     */
+    switch(make){
+        case '1':price=base*1.30;
+                break;
+        case '2':price=base*1.20;
+                break;
+        case '3':price=base*1.10;
+                break;        
+    }
+    // calculating difference
+    const year=insurance.year;
+    const diff= this.getYearDifference(year);
+
+    // price
+    price = price - ((diff*3)*price)/100;
+    // console.log(price);
+    const level = insurance.level;
+    price=this.calculateLevel(price,level);
+    return price;
+}
+
+Insurance.prototype.getYearDifference = function(year){
+    return new Date().getFullYear() - year;
+}
+
+Insurance.prototype.calculateLevel=function(price,level){
+    // basic insurance is going to increase the value by 30% and complete will increase by 50%
+    if(level==='basic'){
+        price=price*1.30;
+    }
+    else{
+        price=price*1.50;
+    }
+    return price;
+}
+
+//Using protyping to create an object.
+function HTMLUI() {}
+
+//Displays the latest 20 years in the select tag
+HTMLUI.prototype.displayYears = function(){
+    // max and min year to display
+    const max = new Date().getFullYear();
+    const min = max-20;
+    // console.log(max+" "+min);
+        
+    // Generating the list with the 20 years
+
+    const selectYears=document.getElementById('year');
+    //Creating the option for select tag in html
+    for(let i=max;i>=min;i--){
+        const option=document.createElement('option');
+        option.value=i;
+        option.textContent=i;
+        selectYears.appendChild(option);
+    }
+}
+
+//Function for displaying error
+HTMLUI.prototype.displayError= function(msg){
+    //creating a div for message
+    const div =document.createElement('div');
+    div.classList='error';
+
+    //insert the message
+    div.innerHTML=`<p>${msg}</p>`;
+
+    form.insertBefore(div, document.querySelector('.form-group'));
+    setTimeout(() => {
+        document.querySelector('.error').remove();
+    }, 3000);
+}
+
+//Prints the results into html UI
+
+HTMLUI.prototype.showResults=function(price,insurance){
+    const result=document.getElementById('result');
+
+    //creating a div 
+    const div= document.createElement('div');
+    let make=insurance.make;
+    switch (make) {
+        case '1':
+            make='Bugati Veyron';
+            break;
+        case '2':
+            make='Lamborghini';
+            break;
+        case '3':
+            make='Audi';
+            break;
+    }
+    div.innerHTML=`
+    <p class="header">Summary </p>
+    <p>Make or Model: ${make}</p>
+    <p>Year of Manufacture: ${insurance.year}</p>
+    <p>Level of insurance: ${insurance.level}</p>
+    <p class="total"> Total Price: &#x20b9 ${price}</p>
+    `;
+
+    //inserting the spinner
+    const spinner=document.querySelector('#loading img');
+    spinner.style.display='block';
+    setTimeout(() => {
+        spinner.style.display='none';
+        result.appendChild(div);
+    }, 3000);
+    
+}
+    </script>
+  </body>
+</html>

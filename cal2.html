@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<style>
+    h1,h2 { font-size:x-large; }
+	.calc { padding:20px; }
+    #op { font-family:'Courier New', Courier, monospace; font-weight:bold; color:blue; }
+@media all and (max-width: 576px) {
+	.calc { padding:15px; width:100%; }
+	.calc input[type=text] { width:100%; }
+	.calc textarea { width:100%; }
+}
+
+@media all and (min-width: 577px) {
+	.calc input[type=text] { width:300px; }
+	.calc textarea { width:441px; }
+}
+
+@media (min-width: 1200px){
+.container {
+    width: 50%;
+    background-color: aqua;
+    font-family: -webkit-body;}
+}
+</style>
+</head>
+
+<body>
+<div id="lcol" class="container">
+
+	<div id="doc">
+	<!-- #BeginEditable "doctext" -->
+	<h1>Binary Calculator</h1>
+	<form name="calcform" autocomplete="off">
+	<table class="calc">
+	  <tbody>
+	  <tr>
+		<td colspan="2">First number:</td>
+	  </tr>
+	  <tr>
+		<td><input type="text" id="x1" name="x1" tabindex="1" class="form-control input-lg" autofocus></td>
+        <td><select id="b1" tabindex="2" class="form-control input-lg">
+            <option>Binary</option>
+            <option>Decimal</option>
+            <option>Hex</option>
+        </select></td>
+	  </tr>
+	  <tr>
+		<td colspan="2">Operation:</td>
+	  </tr>
+      <tr>
+          <td colspan="2">
+              <select id="op" tabindex="2" onchange="selchange()" tabindex="3" class="form-control input-lg">
+                <option>add (+)</option>
+                <option>sub (-)</option>
+                <option>mult (&times;)</option>
+                <option>div (&div;)</option>
+                <option>and (&amp;)</option>
+                <option>or (|)</option>
+                <option>not (~)</option>
+                <option>xor (^)</option>
+                <option>left shift (<<)</option>
+                <option>right shift (>>)</option>
+                <option>zerofill right shift (>>)</option>
+              </select>
+          </td>
+      </tr>
+	  <tr>
+		<td colspan="2">Second number:</td>
+	  </tr>
+	  <tr>
+		<td><input type="text" id="x2" name="x2" tabindex="4" class="form-control input-lg"></td>
+        <td><select id="b2" tabindex="5" class="form-control input-lg">
+            <option>Binary</option>
+            <option>Decimal</option>
+            <option>Hex</option>
+        </select></td>
+	  </tr>
+	  <tr>
+	  	<td colspan="2">
+			<button class="btn btn-warning" type="button" title="Calculate" class="btn btn-default btn-lg" tabindex="6" onclick="calc()">Calculate</button>
+			<button class="btn btn-danger" type="reset" title="Reset" class="btn btn-default btn-lg" tabindex="7"> Reset</button>
+	  	</td>
+	  </tr>
+	  <tr>
+		<td colspan="2">Binary number result:</td>
+	  </tr>
+	  <tr>
+		<td colspan="2"><textarea rows="2" id="y1" class="form-control input-lg" readonly tabindex="8"></textarea></td>
+	  </tr>
+	  <tr>
+		<td colspan="2">Decimal number result:</td>
+	  </tr>
+	  <tr>
+		<td colspan="2"><textarea rows="2" id="y2" class="form-control input-lg" readonly tabindex="9"></textarea></td>
+	  </tr>
+	  <tr>
+		<td colspan="2">Hex number result:</td>
+	  </tr>
+	  <tr>
+		<td colspan="2"><textarea rows="2" id="y3" class="form-control input-lg" readonly tabindex="10"></textarea></td>
+	  </tr>
+	  </tbody>
+	</table>
+	</form>			
+	
+	<p>&nbsp;</p>
+	<hr>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	$( document ).ready(function() {
+        $("#x1").on("input", function(e) {
+            var s = $("#x1").val();
+            var dec  = /[2-9]/.test(s);
+            var hex  = /[A-F]/i.test(s);
+            if( dec ) $("#b1")[0].selectedIndex=1;
+            if( hex ) $("#b1")[0].selectedIndex=2;
+        });
+        $("#x2").on("input", function(e) {
+            var s = $("#x2").val();
+            var dec  = /[2-9]/.test(s);
+            var hex  = /[A-F]/i.test(s);
+            if( dec ) $("#b2")[0].selectedIndex=1;
+            if( hex ) $("#b2")[0].selectedIndex=2;
+        });
+	});
+	function copy()
+	{
+		$("#y").select();
+		document.execCommand('copy');
+	}
+	function selchange() {
+        var op = $("#op")[0].selectedIndex;
+        if( op==6 ) {
+           
+            $(".calc tr:nth-child(5)").hide();
+            $(".calc tr:nth-child(6)").hide();
+        }
+        else {
+            
+            $(".calc tr:nth-child(5)").show();
+            $(".calc tr:nth-child(6)").show();
+        }
+    }
+	function calc() {
+		var op = $("#op")[0].selectedIndex;
+		var x1 = $("#x1").val();
+		var x2 = $("#x2").val();
+		var b1 = $("#b1")[0].selectedIndex;
+		var b2 = $("#b2")[0].selectedIndex;
+      var bx1,bx2,y,y1,y2,y3;
+      b1 = [2,10,16][b1];
+      b2 = [2,10,16][b2];
+      try {
+         bx1 = new BigNumber(x1, b1);
+         $("#x1").css("background-color", "white");
+      }
+      catch(err) {
+         $("#x1").css("background-color", "#fff0f0");
+         $("#x1").focus();
+         $("#y1").val("");
+         $("#y2").val("");
+         $("#y3").val("");
+         return;
+      }
+      try {
+         bx2 = new BigNumber(x2, b2);
+         $("#x2").css("background-color", "white");
+      }
+      catch(err) {
+         $("#x2").css("background-color", "#fff0f0");
+         $("#x2").focus();
+         $("#y1").val("");
+         $("#y2").val("");
+         $("#y3").val("");
+         return;
+      }
+      if( op>=4 ) {
+         x1 = parseInt(x1, b1);
+         x2 = parseInt(x2, b2);
+      }
+      switch(op) {
+         case 0:
+               
+               y = bx1.plus(bx2);
+               break;
+         case 1:
+               
+               y = bx1.minus(bx2);
+               break;
+         case 2:
+              
+               y = bx1.times(bx2);
+               break;
+         case 3:
+               
+               y = bx1.div(bx2);
+               break;
+         case 4: 
+               y = x1 & x2;
+               break;
+         case 5: 
+               y = x1 | x2;
+               break;
+         case 6: 
+               y = ~x1;
+               break;
+         case 7: 
+               y = x1 ^ x2;
+               break;
+         case 8: 
+               y = x1 << x2;
+               break;
+         case 9: 
+              
+               y = x1 >> x2;
+               break;
+         case 10: 
+          
+               y = x1 >>> x2;
+               break;
+      }
+      BigNumber.set({ DECIMAL_PLACES: 16 });
+      y1 = y.toString(2);
+      y2 = y.toString(10);
+      y3 = y.toString(16).toUpperCase();
+		$("#y1").val(y1);
+		$("#y2").val(y2);
+		$("#y3").val(y3);
+	}
+</script>
+
+<script src="https://drive.google.com/uc?id=1p9SKelQwcxb2EcLl3iOLPJ9G8zvOpMLK" type="text/javascript" charset="utf-8" async defer></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+
+<html>
+    <head>
+        <title>Insult Me, Trump!</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <style type="text/css">
+            body {
+                    background-color: #f9563a;
+                    color: white;
+                    text-align: center;
+                }
+        </style>
+    </head>
+
+    <body>
+        <div>
+        <h1 class="text-center">Trumpian Nickname Generator!</h1>
+        <div class="d-flex justify-content-center  ">
+            <div class="col-5 text-center text-dark pb-1">Have you ever seen Trump dish out condescending nicknames like "Crooked Hillary" and "Shifty Schiff" and wished you had one for yourself?  Well now's your chance!</div>
+        </div>
+         
+        </div>
+        <div class="d-flex justify-content-center">
+            <div id="app" class="form-group bg-dark p-5 ">
+                
+                <h2>Enter your name</h2>
+                <input v-model="name" placeholder="Name goes here" class="form-control"><br>
+                <button v-on:click="generateName" class="btn btn-warning">Insult me, Trump!</button>
+                <br>
+
+                <h2 v-if="show_nickname" id="result">{{ message }}</h2>
+            </div>
+        </div>
+        
+        <p>NOTE: This is totally meant to be parody</p>
+       
+        <script>
+            var app = new Vue({
+    el: '#app',
+    data: {
+        show_nickname: false,
+        message: '',
+        name: '',
+        term: ''
+    },
+    methods: {
+        selectTerm: function(terms) {
+          // Using "random" to select a term to return by index number
+          term = terms[Math.floor(Math.random()*terms.length)]
+          // capitalize word
+          return term.charAt(0).toUpperCase() + term.slice(1)
+        },
+       
+        generateName: function() {
+            // Generate nickname
+            this.show_nickname = true;
+            this.term = this.selectTerm(terms);
+            this.message = "Uh oh! Looks like President Trump really has it out for you, " + this.term + " " + this.name + "!";
+        }
+    }
+
+
+})
+            var terms = [
+"abandoned",
+"abased",
+"altered",
+"angry",
+"atrocious",
+"bad",
+"baneful",
+"base",
+"beastly",
+"bent",
+"boorish",
+"bribable",
+"cagey",
+"calamitous",
+"collusive",
+"conniving",
+"contaminated",
+"contriving",
+"corrupt",
+"crafty",
+"criminal",
+"crooked",
+"cunning",
+"damnable",
+"debauched",
+"decayed",
+"deceitful",
+"deceptive",
+"defiled",
+"degenerate",
+"degraded",
+"deleterious",
+"delusive",
+"delusory",
+"depraved",
+"destructive",
+"devious",
+"disastrous",
+"dishonest",
+"dishonorable",
+"dishonored",
+"dissembling",
+"dissimulating",
+"dissolute",
+"distorted",
+"doctored",
+"dodging",
+"double-crossing",
+"double-dealing",
+"dubious",
+"duplicitous",
+"elusive",
+"equivocating",
+"evasive",
+"evil",
+"execrable",
+"exploiting",
+"extortionate",
+"faithless",
+"false",
+"falsified",
+"falsifying",
+"fibbing",
+"fixed",
+"flagitious",
+"fly-by-night",
+"foul",
+"foxy",
+"fraudulent",
+"furtive",
+"guileful",
+"harmful",
+"hateful",
+"heinous",
+"hideous",
+"illegal",
+"inconstant",
+"indirect",
+"infamous",
+"infected",
+"iniquitous",
+"injurious",
+"insidious",
+"inventing",
+"knavish",
+"loathsome",
+"loose",
+"low",
+"lying",
+"maleficent",
+"malevolent",
+"malicious",
+"malignant",
+"mendacious",
+"mercenary",
+"miscreant",
+"misleading",
+"misrepresenting",
+"misstating",
+"monstrous",
+"nefarious",
+"noxious",
+"obscene",
+"offensive",
+"open",
+"padded",
+"perfidious",
+"pernicious",
+"perverse",
+"poison",
+"polluted",
+"praetorian",
+"prevaricating",
+"prevaricative",
+"prevaricatory",
+"profiteering",
+"profligate",
+"putrescent",
+"putrid",
+"questionable",
+"rancorous",
+"reprobate",
+"repugnant",
+"repulsive",
+"revolting",
+"roguish",
+"rotten",
+"ruthless",
+"scheming",
+"shady",
+"shifty",
+"shrewd",
+"shuffling",
+"slick",
+"slimy",
+"slippery",
+"sly",
+"sneaky",
+"snide",
+"spiteful",
+"stinking",
+"suborned",
+"tainted",
+"treacherous",
+"tricky",
+"two-faced",
+"two-timing",
+"ugly",
+"underhand",
+"underhanded",
+"unethical",
+"unfaithful",
+"unhonest",
+"unlawful",
+"unpleasant",
+"unprincipled",
+"unpropitious",
+"unreliable",
+"unscrupulous",
+"untrustworthy",
+"untruthful",
+"venal",
+"vicious",
+"vile",
+"villainous",
+"wicked",
+"wily",
+"wrathful",
+"wrong",
+]
+        </script>
+    </body>
+
+</html>

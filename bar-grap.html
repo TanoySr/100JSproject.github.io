@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://kit.fontawesome.com/c570884f0c.js" crossorigin="anonymous"></script>
+	<style>
+	h1 { font-size:xx-large; }
+	h2 { font-size:x-large; }
+	.calc3 input[type=color] { height:38px; }
+	.input-group>.form-control { width:40px; }
+	.calc3 input[type=checkbox] { 
+		-ms-transform: scale(2);
+		-moz-transform: scale(2);
+		-webkit-transform: scale(2);
+		-o-transform: scale(2);
+		transform: scale(2);
+		padding: 10px;
+  	}
+	.nav-link i { vertical-align:middle; }
+	@media only screen and (max-width: 576px) {
+		.calc3 { padding:10px; }
+		.calc3 td { float:left; width:100%; }
+		.calc3 td:nth-child(2) { clear:left; }
+		.calc3 tr td:nth-child(3) { padding-top:10px; }
+		.calc3 tr td:nth-child(3) select { margin-top:-8px; }
+	}
+	@media only screen and (min-width: 577px) {
+		.calc3 { padding:15px; }
+		.calc3 tr { line-height:40px; }
+	}
+	.calc2 tr td button { width:42px; height:34px; vertical-align:top }
+  	#chart_div { margin-top:10px; border:1px solid #ccc }
+	@media (max-width:576px) {
+		.calc2 { margin-left:-5px; width:100% !important; }
+		.calc2 tr td:last-child { width:100%; }
+		.calc2 input[type=text] { width:100%; width: calc(100% - 8px); font-size:initial; padding-left:5px; }
+		.calc2 input[type=checkbox] { margin:10px 0px 0px 10px; }
+		.calc2 tr:nth-child(n+9):nth-child(-n+15) td input[type=text]:first-child { width:64%; }
+		.calc2 tr:nth-child(n+9):nth-child(-n+15) td input[type=text]:last-child { width:32%; }
+  		#chart_div { width: 100%; }
+	}
+	@media (min-width:577px) {
+		.calc2 input[type=text] { width: 400px; font-size:initial; padding-left:5px; }
+		.calc2 tr:nth-child(n+9):nth-child(-n+15) td input[type=text]:first-child { width:300px; }
+		.calc2 tr:nth-child(n+9):nth-child(-n+15) td input[type=text]:last-child { width:94px; }
+  		#chart_div { width: 580px; height: 400px; }
+	}
+</style>
+</head>
+<body>
+
+<div id="lcol" class="d-flex justify-content-center">
+
+		<div id="doc" style="background-color: #f9593d;" class="p-2">
+			
+			<h1 class="text-center text-light">Bar Graph Maker</h1>
+			<form name="gen" onsubmit="return false;" >
+			
+			<br>
+			<table class="calc3">
+				<tr>
+					<td>Graph title:</td>
+					<td><input type="text" class="form-control" name="title" placeholder="Graph Title"></td>
+				</tr>
+				<tr>
+					<td>Horizontal axis label:</td>
+					<td><input type="text" class="form-control" name="hlabel" placeholder="hLabel"></td>
+				</tr>
+				<tr>
+					<td>Vertical axis label:</td>
+					<td><input type="text" class="form-control" name="vlabel" placeholder="vLabel"></td>
+				</tr>
+				<tr>
+					<td>Horizontal data type:</td>
+					<td>
+					 <select name="type" onchange="OnTypeChange()" class="form-control">
+						<option>Data labels</option>
+						<option>Data values</option>
+						<option>Data range</option>
+					 </select>
+					</td>
+				</tr>
+				<tr id="xrow0">
+					<td>Data labels:</td>
+					<td><input type="text" class="form-control" name="xdesc" placeholder="name_1 name_2 name_3 name_4"></td>
+				</tr>
+				<tr id="xrow1" style="display:none">
+					<td>Data values:</td>
+					<td><input type="text" class="form-control" name="xdata" placeholder="1 2 3 4"></td>
+				</tr>
+				<tr id="xrow2" style="display:none">
+					<td>Data range:</td>
+					<td><input type="text" class="form-control" name="xrange" placeholder="1 4"></td>
+				</tr>
+				<tr>
+					<td>Number of bars:</td>
+					<td>
+					 <select name="num" onchange="OnLineNumChange()" class="form-control">
+						<option selected>1 bar</option>
+						<option>2 bars</option>
+						<option>3 bars</option>
+						<option>4 bars</option>
+						<option>5 bars</option>
+						<option>6 bars</option>
+					 </select>
+					</td>
+				</tr>
+				<tr class="datarow[]">
+					<td>Bar1 data values:</td>
+					<td class="input-group">
+						<input type="text" name="data[]" placeholder="300 500 100 200" class="form-control">
+						<input type="text" name="desc[]" placeholder="Bar1" class="form-control">
+						<input type="color" name="color[]" value="#3366CC" onchange="OnColorChange(this.value,1)">
+					</td>
+				</tr>
+				<tr class="datarow[]" style="display:none">
+					<td>Bar2 data values:</td>
+					<td class="input-group">
+						<input type="text" name="data[]" placeholder="300 500 100 200" class="form-control">
+						<input type="text" name="desc[]" placeholder="Bar2" class="form-control">
+						<input type="color" name="color[]" value="#DC3912" onchange="OnColorChange(this.value,2)">
+				</td>
+				</tr>
+				<tr class="datarow[]" style="display:none">
+					<td>Bar3 data values:</td>
+					<td class="input-group">
+						<input type="text" name="data[]" placeholder="300 500 100 200" class="form-control">
+						<input type="text" name="desc[]" placeholder="Bar3" class="form-control">
+						<input type="color" name="color[]" value="#FF9900" onchange="OnColorChange(this.value,3)">
+					</td>
+				</tr>
+				<tr class="datarow[]" style="display:none">
+					<td>Bar4 data values:</td>
+					<td class="input-group">
+						<input type="text" name="data[]" placeholder="300 500 100 200" class="form-control">
+						<input type="text" name="desc[]" placeholder="Bar4" class="form-control">
+						<input type="color" name="color[]" value="#109618">
+					</td>
+				</tr>
+				<tr class="datarow[]" style="display:none">
+					<td>Bar5 data values:</td>
+					<td class="input-group">
+						<input type="text" name="data[]" placeholder="300 500 100 200" class="form-control">
+						<input type="text" name="desc[]" placeholder="Bar5" class="form-control">
+						<input type="color" name="color[]" value="#990099">
+					</td>
+				</tr>
+				<tr class="datarow[]" style="display:none">
+					<td>Bar6 data values:</td>
+					<td class="input-group">
+						<input type="text" name="data[]" placeholder="300 500 100 200" class="form-control">
+						<input type="text" name="desc[]" placeholder="Bar6" class="form-control">
+						<input type="color" name="color[]" value="#0099C6">
+					</td>
+				</tr>
+				<tr>
+					<td>Horizontal bars:</td>
+					<td><input type="checkbox" name="c" onclick="OnDraw()" ></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<a role="button" title="Draw Graph" onclick="OnDraw()" class="btn btn-light"><i class="fas fa-chart-bar"></i></a>
+						<a role="button" title="Zoom Out" onclick="OnZoomOut()" class="btn btn-light"><i class="fas fa-search-minus"></i></a>
+						<a role="button" title="Zoom In" onclick="OnZoomIn()" class="btn btn-light"><i class="fas fa-search-plus"></i></a>
+					   <a href="" role="button" title="Save as PNG Image" id="download" download="bar-graph" target="_blank" class="btn btn-light"><i class="fas fa-save"></i></a>
+				      <a role="button" title="Copy Graph" onclick="OnCopy()" class="btn btn-light"><i class="fas fa-copy"></i></a>
+					   <a role="button" title="Print Graph" onclick="OnPrint()" class="btn btn-light"><i class="fas fa-print"></i></a>
+					   <a role="button" title="Reset" onclick="OnReset()" class="btn btn-light"><i class="fas fa-trash-alt"></i></a>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><div id="chart_div"></div><!--<a id="download" download="bar-graph" target="_blank">Download</a>--></td>
+				</tr>
+			</table>
+			</form>
+		</div>
+</div>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://www.gstatic.com/charts/loader.js"></script>
+ <script>
+	    var txt,desc,data,c,st;
+	    var x=580;
+	    var y=400;
+	    
+       $( document ).ready(function() {
+            setGraphSize();          
+            google.charts.load("visualization", "1", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            //$("#pnglnk").click(function(e) { alert("Clicked"); e.preventDefault(); });
+        });
+		
+		function setGraphSize()
+		{
+			var w = window,
+			    d = document,
+			    e = d.documentElement,
+			    g = d.getElementsByTagName('body')[0],
+			    xx = w.innerWidth || e.clientWidth || g.clientWidth;
+			    if( xx<577 )
+				    for(i=0; i<7; i++)
+				    {
+				    	x*=0.9;
+				    	y*=0.9;
+				    }
+		}
+	    function OnDraw()
+	    {
+	    	//GetData();
+	    	
+			drawChart();
+	    }
+		function OnCopy()
+		{
+			alert("Press Save button and open image viewer to copy graph");
+		}
+		function OnPrint()
+		{
+			alert("Press Save button and open image viewer to print graph");
+		}
+	    function OnReset()
+	    {
+	    	x=580;
+	    	y=400;
+	    	setGraphSize();
+			imgContainer = document.getElementById('img_div');
+			while (imgContainer.firstChild) {
+			  imgContainer.removeChild(imgContainer.firstChild);
+			}
+	    	setTimeout(function(){OnDraw();}, 100);
+	    	document.gen.reset();
+	    }
+	    function OnZoomOut()
+	    {
+	    	x*=0.9;
+	    	y*=0.9;
+	    	OnDraw();
+	    }
+	    function OnZoomIn()
+	    {
+	    	x/=0.9;
+	    	y/=0.9;
+	    	OnDraw();
+	    }
+		function OnTypeChange()
+		{
+	    	//var xrow = document.gen['xrow[]'];
+	    	var xrow0 = document.getElementById("xrow0");;
+	    	var xrow1 = document.getElementById("xrow1");;
+	    	var xrow2 = document.getElementById("xrow2");;
+	    	var type = document.gen.type.selectedIndex;
+	    	if( type==0 )
+	    	{
+		    	xrow0.style.display = '';
+		    	xrow1.style.display = 'none';
+		    	xrow2.style.display = 'none';
+		    }
+		    else if( type==1 )
+	    	{
+		    	xrow0.style.display = 'none';
+		    	xrow1.style.display = '';
+		    	xrow2.style.display = 'none';
+		    }
+		    else // type==2
+	    	{
+		    	xrow0.style.display = 'none';
+		    	xrow1.style.display = 'none';
+		    	xrow2.style.display = '';
+		    }
+		    
+			drawChart();
+		}
+		function OnLineNumChange()
+		{
+			var row = document.getElementsByClassName('datarow[]');
+	    	var i = document.gen.num.selectedIndex;
+	    	var k;
+	    	if( i>0 )
+	    		for(k=1; k<i+1; k++)
+		    		row[k].style.display = '';
+		    if( i<5 )
+		    	for(k=i+1; k<6; k++)
+			    	row[k].style.display = 'none';
+			
+			drawChart();
+		}
+		function OnColorChange(color, i)
+		{
+		}
+		function drawChart() 
+		{
+	    	txt = document.gen.title.value;
+	    	if( txt=='' ) txt="Graph Title";
+	    	
+	    	type = document.gen.type.selectedIndex;
+	    	if( type==0 ) {
+		    	s = document.gen.xdesc.value;
+	    		if( s=='' ) s="name_1 name_2 name_3 name_4";
+	    		desc = s.split(' ');
+	    	}
+	    	else if( type==1 ) {
+		    	s = document.gen.xdata.value;
+		    	if( s=='' ) s="1 2 3 4";
+	    		desc = s.split(' ');
+		    }
+	    	else { // type==2
+		    	s = document.gen.xrange.value;
+		    	if( s=='' ) s="1 4";
+   		    	s2 = s.split(' ');
+   		    	i1 = parseFloat(s2[0]);
+   		    	i2 = parseFloat(s2[1]);
+	    		data = document.gen['data[]'];
+		    	s = data[0].value;
+		    	if( s=='' ) s="300 500 100 200";
+		    	s = s.split(' ');
+		    	num = s.length;
+   		    	di = (i2-i1)/(num-1);
+   		    	for(i=i1,k=0; k<num; i+=di,k++)
+   		    		desc[k] = i;
+		    }
+	    	
+	    	var num = document.gen.num.selectedIndex+1;
+	    	var data = document.gen['data[]'];
+	    	//s = data.value;
+	    	//if( s=='' ) s="300 500 100 200 200";
+	    	//d = s.split(' ');
+	    	d = new Array(num);
+	    	for(k=0; k<num; k++)
+	    	{
+		    	s = data[k].value;
+		    	if( s=='' ) s="300 500 100 200";
+		    	s = s.split(' ');
+		    	d[k] = new Array(s.length);
+		    	for(i=0; i<s.length; i++) {
+					d[k][i] = s[i];		    		
+		    	}
+	    	}
+	    	
+	    	c = document.gen.c.checked;
+		
+			var arr=new Array();
+	    	var ldesc = document.gen['desc[]'];
+		    arr[0] = new Array(num+1);
+		    arr[0][0] = 'Task';
+		    for(var k=0; k<num; k++)
+		    {
+		    	ld = ldesc[k].value;
+		    	if( ld=='' )
+		    		arr[0][k+1] = 'Bar'+(k+1);
+		    	else
+		    		arr[0][k+1] = ld;
+		    }
+			//arr[0][num+1] = { role: 'style' };
+		    
+			for(var i=0; i<s.length; i++)
+			{
+		    	arr[i+1] = new Array(num+1);
+				if( type==0 )
+				   	arr[i+1][0] = desc[i];
+				else
+				   	arr[i+1][0] = parseFloat(desc[i]);
+		    	for(k=0; k<num; k++) {
+					arr[i+1][k+1] = parseFloat(d[k][i]);
+				}
+			}
+
+			var data2 = google.visualization.arrayToDataTable(arr);
+			
+			hLabel = document.gen.hlabel.value;
+			if( hLabel=='' ) hLabel='hLabel';
+			vLabel = document.gen.vlabel.value;
+			if( vLabel=='' ) vLabel='vLabel';
+			//if( c==false )
+			//	curve = 'none';
+			//else
+			//	curve = 'function';
+			
+	    	var color = document.gen['color[]'];
+			var optcolors=[];
+			for(var k=0; k<num; k++)
+			{
+				optcolors[k] = color[k].value;
+			}
+			var options = {
+			  title: txt,
+			  //curveType: curve,
+			  //hAxis: {logScale: false},
+			  //vAxis: {logScale: false},
+			  hAxis: {title: hLabel},
+			  vAxis: {title: vLabel},
+			  width: x,
+			  height: y,
+			  colors: optcolors
+			};
+			options.hAxis.gridlines = {color: '#CCC', count: 5};
+			options.vAxis.gridlines = {color: '#CCC', count: 5};
+			var chart;
+			if( c==false )
+				chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+			else
+				chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+            google.visualization.events.addListener(chart, 'ready', function () {
+                var data=chart.getImageURI();
+                $("#download").prop("href", data);
+                $("#download").click();
+            });
+			chart.draw(data2, options);
+		}
+
+		/*
+// Chrome/Firefox/MSIE/Opera
+function get_browser()
+{
+    var N=navigator.appName, ua=navigator.userAgent, tem;
+    var M=ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+    M=M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+    return M[0];
+}
+function get_browser_version()
+{
+    var N=navigator.appName, ua=navigator.userAgent, tem;
+    var M=ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+    M=M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+    return M[1];
+}
+*/
+// Chrome/Firefox/MSIE/Opera
+function get_browser()
+{
+	s = GetBrowser();
+	s = s.split(' ');
+	return s[0];
+}
+function get_version()
+{
+	s = GetBrowser();
+	s = s.split(' ');
+	return s[1];
+}
+function GetBrowser()
+{
+    var ua= navigator.userAgent, tem, 
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'MSIE '+(tem[1] || '');
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\bOPR\/(\d+)/)
+        if(tem!= null) return 'Opera '+tem[1];
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M.join(' ');
+}
+function GetOS()
+{
+	var OSName="unknown";
+	if( navigator.appVersion.indexOf("Win")!=-1 ) 	OSName="Windows";
+	if( navigator.appVersion.indexOf("X11")!=-1 ) 	OSName="UNIX";
+	if( navigator.appVersion.indexOf("Linux")!=-1 ) OSName="Linux";
+	if( navigator.appVersion.indexOf("Mac")!=-1 ) 	OSName="MacOS";
+	if( navigator.userAgent.match(/Android/i) )		OSName="Android";
+	if( navigator.userAgent.match(/iPhone|iPad|iPod/i) ) OSName="iOS";
+	return OSName;
+}
+function GetFileName(file)
+{
+	i0 = file.lastIndexOf('/');
+	i1 = file.lastIndexOf('\\');
+	if( i0>i1 ) i1=i0;
+	//if( i1==-1) i1=0;
+	i1++;
+	i2 = file.lastIndexOf('.');
+    name = file.substring(i1,i2) || file;
+    return name;
+}
+function GetFileExt(file)
+{
+	var ext = file.substring(file.lastIndexOf('.'));
+	return ext;
+}
+
+function ShortBtn()
+{
+	var x,y,s;
+	x = $(window).width()-400;
+	y = 20;
+	//$("#short_div").popup("option", "arrow", "l,t,r,b");
+	$("#short_div").popup("open",{ arrow:true, x:x, y:y });
+	var browser = get_browser();
+	var os = GetOS();
+	if( os=="iOS" )
+	{
+		s="Add to home screen:\n";
+		s+="<ol>";
+		s+="<li>Click the Share button&nbsp&nbsp<img src=\"/lib/icons/glyphicons_all/glyphicons_halflings/glyphicons_halflings_065_share.png\">.</li>";
+		s+="<li>Select <b>Add to Home Screen</b>.</li>";
+		s+="</ol>";
+	}
+	else if( os=="Android" )
+	{
+		s="Add to home screen:\n";
+		s+="<ol>";
+		s+="<li>Click the Settings button&nbsp&nbsp<img src=\"/lib/icons/glyphicons_all/glyphicons_halflings/glyphicons_halflings_011_3dot.png\">.</li>";
+		s+="<li>Click the Star button&nbsp&nbsp<img src=\"/lib/icons/glyphicons_all/glyphicons_halflings/glyphicons_halflings_006_star-empty.png\">.</li>";
+		s+="<li>Select <b>Add shortcut to home screen</b>.</li>";
+		s+="</ol>";
+	}
+	else if( browser=='Chrome' )
+	{
+		s="Add to taskbar:\n";
+		s+="<ol>";
+		s+="<li>Click the Chrome menu <img src=\"//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/images/icons-png/bars-black.png\">.</li>";
+		s+="<li>Click <b>More Tools</b>.</li>";
+		s+="<li>Add the page:<ul>";
+		s+="<li>Windows: Click <b>Add to taskbar</b>.</li>";
+		s+="<li>Linux: Click <b>Add to desktop</b>.</li>";
+		s+="</ul></li>";
+		s+="<li>Check <b>Open as window</b>.</li>";
+		s+="</ol>";
+	}
+	else if( browser=='Firefox' )
+	{
+		s="Add to desktop:\n";
+		s+="Drag the address bar icon <img src=\"/lib/icons/glyphicons_all/glyphicons_halflings/glyphicons_halflings_134_globe.png\"> to the desktop.";
+	}
+	$("#short_div").html(s);
+}
+    </script>
+</body>
+</html>

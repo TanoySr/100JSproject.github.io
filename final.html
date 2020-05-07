@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+#lcol {
+  max-width: 500px;
+  margin: auto;
+}
+
+</style>
+
+</head>
+<body>
+  <div id="lcol">
+
+  <div id="doc">
+  <!-- #BeginEditable "doctext" -->
+  <h1>
+Average Calculator</h1>
+<p>
+Calculates Average/Median/Mode/Standard deviation:</p>
+<form autocomplete="off">
+  <table id="tbl" class="calc2">
+    <tbody>
+<tr>
+      <td><label for="data">Enter data values:</label></td>
+      <td colspan="2"><input rows="3" id="data" class="form-control" autofocus placeholder="1 2 3"></td>
+    </tr>
+<tr>
+      <td><label for="del">Numbers delimiter:</label></td>
+      <td>
+                <select id="seldel" class="form-control" onchange="seldelchange()">
+                    <option value=" ">Space</option>
+                    <option value=",">Comma</option>
+                    <option value="">User Defined</option>
+                </select>
+            </td>
+      <td>
+                <input type="text" id="del" value=" " class="form-control">
+            </td>
+    </tr>
+<tr>
+            <td> </td>
+      <td colspan="2">
+        <button type="button" id="calc" title="Calculate" class="btn btn-success btn-lg"> Calculate</button>
+        <button type="reset" id="reset" title="Reset" class="btn btn-danger btn-lg"> Reset</button>
+      </td>
+    </tr>
+<tr>
+      <td><label for="avg">Average (mean):</label></td>
+      <td colspan="2"><input type="text" id="avg" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="mdn">Median:</label></td>
+      <td colspan="2"><input type="text" id="med" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="mod">Mode:</label></td>
+      <td colspan="2"><input type="text" id="mod" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="std">Population SD:</label></td>
+      <td colspan="2"><input type="text" id="pstd" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="std">Sample SD:</label></td>
+      <td colspan="2"><input type="text" id="sstd" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="cnt">Count:</label></td>
+      <td colspan="2"><input type="text" id="cnt" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="sum">Sum:</label></td>
+      <td colspan="2"><input type="text" id="sum" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="min">Min value:</label></td>
+      <td colspan="2"><input type="text" id="min" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="max">Max value:</label></td>
+      <td colspan="2"><input type="text" id="max" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td><label for="ran">Range:</label></td>
+      <td colspan="2"><input type="text" id="ran" class="form-control" readonly></td>
+    </tr>
+<tr>
+      <td colspan="3"><label for="calc">Average calculation:</label></td>
+    </tr>
+<tr>
+      <td colspan="3"><input rows="3" id="avgcalc" class="form-control" readonly></input></td>
+    </tr>
+<tr>
+      <td colspan="3"><div id="chart_div">
+</div>
+</td>
+    </tr>
+</tbody>
+  </table>
+</form>
+</div>
+</div>
+
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  var dist,avg;
+    $( document ).ready(function() {
+    $("#del").prop("disabled", true);
+        $("#calc").click( Calc );
+    });
+    
+    function Calc()
+    {
+        var txt=$("#data").val().trim();
+        var del=$("#del").val();
+        var num = txt.split(del);
+        if( !num ) return;
+    if( num.length==0 ) return;
+        num=num.map(Number);
+        var sum=0;
+        var min=Math.min(...num);
+        var max=Math.max(...num);
+        var len=num.length;
+        num.sort();
+        for(var i=0; i<len; i++) {
+            sum+=num[i];
+        }
+        dist=[];
+        var prevnum=null;
+        for(var i=0,k=-1; i<len; i++) {
+            if( num[i]!=prevnum ) {
+                prevnum = num[i];
+                k++;
+        dist[k]={};
+                dist[k].num = num[i];
+                dist[k].count=1;
+            }
+            else
+                dist[k].count++;
+        }
+    var countmax=-1;
+        for(var i=0; i<dist.length; i++) {
+      if( dist[i].count>countmax )
+        countmax = dist[i].count;
+    }
+    var mod="";
+        for(var i=0; i<dist.length; i++) {
+      if( dist[i].count==countmax )
+        mod+=dist[i].num+", ";
+    }
+    mod=mod.slice(0,-2);
+        avg=roundresult(sum/len);
+    var std=0;
+        for(var i=0; i<dist.length; i++) {
+      std+=dist[i].count*Math.pow((dist[i].num-avg),2);
+    }
+    var pstd=roundresult(Math.sqrt(std/len));
+    var sstd=roundresult(Math.sqrt(std/(len-1)));
+        var i1=Math.floor((len+1)/2)-1;
+        var i2=Math.floor((len+2)/2)-1;
+        var med=roundresult((num[i1]+num[i2])/2);
+        var range=roundresult(max-min);
+        sum=roundresult(sum);
+        txt="(";
+        for(var i=0; i<len-1; i++)
+            txt+=num[i]+"+";
+        txt+=num[len-1]+") / "+len+" = "+avg;
+        $("#avg").val(avg);
+        $("#med").val(med);
+        $("#mod").val(mod);
+        $("#pstd").val(pstd);
+        $("#sstd").val(sstd);
+        $("#cnt").val(len);
+        $("#sum").val(sum);
+        $("#min").val(min);
+        $("#max").val(max);
+        $("#ran").val(range);
+        $("#avgcalc").val(txt);
+    DrawGraph();
+    }
+    function seldelchange()
+    {
+        var del=$("#seldel").val();
+        $("#del").val(del);
+    if( $("#seldel")[0].selectedIndex==2 )
+      $("#del").prop("disabled", false);
+    else
+      $("#del").prop("disabled", true);
+    }
+    function DrawGraph()
+    {
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawVisualization);
+    }
+    function drawVisualization() {
+        var d=[['', '', { role: 'style' }]];
+        for(var i=0; i<dist.length; i++)
+            //d.push(['',  dist[i], '']);
+            d.push([dist[i].num,  dist[i].count, '']);
+        var data = google.visualization.arrayToDataTable(d);
+
+        var options = {
+            width: 448,
+            legend: {position: 'none'},
+            title : 'Numbers distribution with average',
+            vAxis: {title: '# of occurrences',viewWindow: { min: 0} },
+            hAxis: {title: 'Number'},
+            seriesType: 'bars',
+        };
+        var viewportWidth = $(window).width(); //$("body").innerWidth();
+        if( viewportWidth<=320 )
+            options.width=245;
+        if( viewportWidth<=800 )
+            options.width=292;
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    var n=Math.round(avg*100)/100;
+    drawVAxisLine(chart, n);
+        $("#chart_div").show();
+        $("#doc").css("cursor","default");
+    }
+  function drawVAxisLine(chart,value){
+    var layout = chart.getChartLayoutInterface();
+    var chartArea = layout.getChartAreaBoundingBox();
+
+    var svg = chart.getContainer().getElementsByTagName('svg')[0];
+    var xLoc = layout.getXLocation(value)
+    svg.appendChild(createLine(xLoc,chartArea.top + chartArea.height,xLoc,chartArea.top,'#00cccc',4)); // axis line 
+  }
+
+  function createLine(x1, y1, x2, y2, color, w) {
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', color);
+    line.setAttribute('stroke-width', w);
+    return line;
+  }
+    function clearform() {
+        $("#chart_div").hide();
+    }
+
+    function setfocus() {
+  document.calcform.x.focus();
+}
+function calc() {
+  x = document.calcform.x.value;
+  y = calcfunc(x);
+  y = roundresult(y);
+  document.calcform.y.value = y
+}
+function calc_a() {
+  x = document.calcform2.x.value;
+  y = calcfunc_a(x);
+  y = roundresult(y);
+  document.calcform2.y.value = y
+}
+function calc3() {
+  x1 = document.calcform.x.value;
+  x2 = document.calcform.x2.value;
+  y = calcfunc(x1,x2);
+  y = roundresult(y);
+  document.calcform.y.value = y;
+}
+function calc4() {
+  a = document.calcform.x.value;
+  b = document.calcform.x2.value;
+  c = document.calcform.x3.value;
+  d = b*b-4*a*c;
+  document.calcform.y0.value = roundresult(d);
+  if( d>=0 )
+  {
+    document.calcform.y1.value = roundresult((-b+Math.sqrt(d))/(2*a));
+    document.calcform.y2.value = roundresult((-b-Math.sqrt(d))/(2*a));
+  }
+  else
+  {
+    re = roundresult(-b/(2*a));
+    im = roundresult(Math.sqrt(-d)/(2*a));
+    document.calcform.y1.value = re+' + i'+im;
+    document.calcform.y2.value = re+' - i'+im;
+  }
+  b=-b;
+  document.calcform.y3.value = '('+b.toString()+' \xb1 \u221A('+d.toString()+')) / (2\xd7'+a.toString()+')';
+}
+function calc5() {
+  x = document.calcform.x.value;
+  y = calcfunc(x);
+  y = roundresult(y);
+  if( x>0 ) y='\u00B1'+y;
+  document.calcform.y.value = y
+}
+function calc6() {
+  x1 = document.calcform.x.value;
+  x2 = document.calcform.x2.value;
+  val=x2;
+  if( x2<0 ) val=-val;
+  y = calcfunc(x1,val);
+  y = roundresult(y);
+  if( x2>0 && (x1/2)==Math.round(x1/2) ) y='\u00B1'+y;
+  if( x2<0 ) {
+    if( (x1/2)==Math.round(x1/2) )
+      y='NaN';
+    else
+      y=-y;
+  }
+  document.calcform.y.value = y;
+}
+function roundresult(x) {
+  y = parseFloat(x);
+  y = roundnum(y,10);
+  return y;
+}
+function roundnum(x,p) {
+  var i;
+  var n=parseFloat(x);
+  var m=n.toPrecision(p+1);
+  var y=String(m);
+  i=y.indexOf('e');
+  if( i==-1 ) i=y.length;
+  j=y.indexOf('.');
+  if( i>j && j!=-1 ) 
+  {
+    while(i>0)
+    {
+      if(y.charAt(--i)=='0')
+        y = removeAt(y,i);
+      else
+        break;
+    }
+    if(y.charAt(i)=='.')
+      y = removeAt(y,i);
+  }
+  return y;
+}
+function roundnum2(x,p) {
+  var i;
+  var n=parseFloat(x);
+  var m=n.toFixed(p);
+  var y=String(m);
+  i=y.length;
+  j=y.indexOf('.');
+  if( i>j && j!=-1 ) 
+  {
+    while(i>0)
+    {
+      if(y.charAt(--i)=='0')
+        y = removeAt(y,i);
+      else
+        break;
+    }
+    if(y.charAt(i)=='.')
+      y = removeAt(y,i);
+  }
+  return y;
+}
+function removeAt(s,i) {
+  s = s.substring(0,i)+s.substring(i+1,s.length);
+  return s;
+}
+var gcd = function(a, b) {
+    if ( ! b) {
+        return a;
+    }
+    return gcd(b, a % b);
+};
+</script>
+
+</body>
+</html>

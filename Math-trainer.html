@@ -1,0 +1,157 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <title>Math Trainer</title>
+  <style type="text/css">
+    body {
+  background: #333
+}
+
+.flexBox {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%
+}
+
+.mathCard {
+  background: white;
+  border-radius: 0.25rem;
+  padding: 4rem
+}
+
+.questionText {
+  padding-bottom: 2rem
+}
+
+.svg {
+  height: 24px;
+  width: 24px;
+}
+
+.correctAnswer {
+  color: #34a853;
+  font-size: 1.5rem
+}
+  </style>
+</head>
+
+<body onload="randomCreator()">
+
+  <div class="container-fluid ">
+
+    <div class="flexBox">
+      <div class="mathCard bg-warning">
+        <h1 class="text-center text-info bg-light p-1" style="font-size: 50px;">Math Trainer Using Javascript</h1>
+        <div class="mathQuestion">
+          <h1 class="display-4 questionText text-center mb-0">Placeholder Text</h1>
+        </div>
+        <form id="mathForm">
+          <div class="form-group">
+            <input type="text" class="form-control" id="answerInput" placeholder="Type your answer here">
+          </div>
+          <button type="submit" class="btn btn-outline-primary w-100">Submit</button>
+        </form>
+        <div class="d-flex">
+          <button class="btn btn-outline-light w-100 mt-3" onclick="randomCreator()"><i class="btn btn-primary fa fa-question-circle" aria-hidden="true"></i></button>
+          <button class="btn btn-outline-light w-100 mt-3" onclick="answerHelp()"><i class="btn btn-success fa fa-eye" aria-hidden="true"></button></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://kit.fontawesome.com/c570884f0c.js" crossorigin="anonymous"></script>
+  <script>
+    // Globals
+var tempResult = 1.01;
+
+function doMath(a, b, c) {
+  switch (a) {
+    case "+":
+      return b + c;
+    case "-":
+      return b - c;
+    case "*":
+      return b * c;
+    case "/":
+      return b / c;
+  }
+}
+
+function submitAnswer(result) {
+  document.querySelector("#mathForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var userAnswer = document.querySelector("#answerInput").value;
+    var bool = (result == userAnswer) ? true : false;
+
+    if (bool === true) {
+      // Set color to green for success
+      document.body.style.backgroundColor = "#34a853";
+      setTimeout(function() {
+        document.body.style.backgroundColor = "#333";
+      }, 1000);
+      // Clear input field
+      document.querySelector("#answerInput").value = "";
+      // Ask a new question
+      randomCreator();
+    } else {
+      // Set color to red for failure
+      document.body.style.backgroundColor = "#dc3545";
+      setTimeout(function() {
+        document.body.style.backgroundColor = "#333";
+      }, 1000);
+    }
+  });
+}
+
+function randomCreator() {
+  // Remove the answer if a hint was used
+  if (document.querySelector(".correctAnswer")) {
+    document.querySelector(".correctAnswer").remove();
+  }
+
+  // Set up the random numbers and operator
+  var operators = ["+", "-", "*", "/"];
+  var randomIntOne = parseInt((Math.random() * 100), 10);
+  var randomIntTwo = parseInt((Math.random() * 100), 10);
+  var randomOperator = operators[Math.floor(Math.random() * operators.length)];
+
+  // Create the question text and set it in the document
+  var el = document.querySelector(".questionText");
+  el.innerHTML = ("What is ").concat(randomIntOne, " ", randomOperator, " ", randomIntTwo, "?");
+
+  // Do the math and round floats to two decimals
+  var preliminaryResult = doMath(randomOperator, randomIntOne, randomIntTwo);
+  var isFloat = (!Number.isInteger(preliminaryResult)) ? true : false;
+  var result = (isFloat === true) ? preliminaryResult.toFixed(2) : preliminaryResult;
+  tempResult = result;
+
+  // Set event listener for the form based on browser type
+  var userAnswerInput = document.querySelector("#answerInput");
+  if (userAnswerInput.addEventListener) {
+    userAnswerInput.addEventListener("submit", submitAnswer(result), false);
+  } else if (userAnswerInput.attachEvent) {
+    userAnswerInput.attachEvent("onsubmit", submitAnswer(result));
+  }
+
+  return result;
+}
+
+function answerHelp() {
+  // Make sure the answer isn't already showing
+  if (!document.querySelector(".correctAnswer")) {
+    // Show the answer
+    document.querySelector(".mathQuestion").innerHTML += ("<p class='text-center correctAnswer m-0 mb-3'>The Answer is " + tempResult + "</p>");
+  }
+}
+  </script>
+</body>
+
+</html>

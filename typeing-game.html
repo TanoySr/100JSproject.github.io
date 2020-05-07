@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <style type="text/css">
+    .container{
+  height: 100%;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  position: relative;
+}
+.words-block{
+  background: #F3FFBA;
+    height: 320px;
+    border: dotted 1px #e0e0e0;
+    position: relative;
+    border-radius: 0;
+    margin-top: 5px;
+    padding: 2%;
+    border-bottom: 0;
+    overflow: hidden;
+}
+.fire-block{
+    background: #2D80D4;
+    text-align: center;
+    height:19%;
+    border-radius: 0 0 15px 15px;
+}
+form{
+  padding: 10px;
+}
+.fire-block .input-field,.fire-block .input-field:focus{
+  border-radius: 10px;
+    border: solid 1px #e0e0e0;
+    padding: 15px;
+    background: #fff;
+    width: 80%;
+    outline: none;
+    margin: 10px;
+}
+.gamewords{
+  display: inline-block;
+  background: #ddd;
+  padding: 5px;
+  position:absolute;
+  transition:opacity linear 2s;
+  border-radius: 2px;
+  top:0;
+}
+.btn{
+  padding: 12px 28px;
+    background: yellow;
+    color: black;
+    font-size:18px;
+    border: 0;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.btn:hover{
+  background: rgb(66, 183, 42, 0.8);
+  color: white;
+}
+.game-board{
+  height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.9);
+    color: #fff;
+    z-index: 2; 
+    text-align: center;
+    border-radius: 5px;
+}
+.game-board.after{
+  display: none;
+}
+.game-board .digit{
+  font-size: 32px;
+    margin: 15px 0;
+}
+.game-board .score-board span{
+  font-size:18px;
+}
+.mainscore-board{
+    margin: auto;
+    background: #B1DCBE;
+    text-align: center;
+    padding: 8px 0;
+    box-shadow: 0 3px 0px #6DC1B3;
+    border-radius: 15px 15px 0 0;
+}
+
+@keyframes fadeAndScale {
+    from {
+        opacity: 0;
+        transform: scale(.9, .9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+}
+.message-text{
+    font-size: 24px;
+    display: none;
+    position: absolute;
+    top: 40%;
+    text-align: center;
+    width: 90%;
+    z-index: 9999;
+    font-weight: normal;
+    background: rgba(0,0,0,0.3);
+    color: #FFF;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    padding: 20px 0 25px 0;
+    transform-origin: 50% 100%;
+    text-shadow: 2px 2px 2px #333;
+    
+}
+.animate-me{
+    animation-duration: .3s;
+    animation-name: fadeAndScale;
+    animation-timing-function: cubic-bezier(.71,.55,.62,1.57);
+}
+
+
+
+  </style>
+</head>
+<body>
+<div class="container bg-danger">
+  <h1 class="text-center text-light">Typeing Game</h1>
+  <div class="pb-5">
+  <div class="game-board before">
+    <h1 class="game-title">Word Game!</h1>
+    <p>Score 10 to complete level</p>
+    <button class="btn start_game">Start Game</button>
+  </div>
+  <div class="game-board after">
+    <h1 class="game-title">Game Over!</h1>
+    <p class="score-board">Level Score:<h3 class="digit">0</h3></p>
+    <span class="btn reset_game" onClick="location.reload(true)">Oops! Try Again</span>
+    
+  </div>
+  <p class="mainscore-board">Score: <strong class="digit">0</strong></p>
+  <div class="message-text animate-me"></div>
+  <div class="words-block bg-warning " id="words-block">
+    
+  </div>
+  <div class="fire-block">
+    
+      <input type="text" class="input-field" id="matchValue" placeholder="Type correct matching words" />
+    
+  </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+  "use strict";
+
+/*Fisher–Yates shuffle Algo*/
+function shuffle(array) {
+  
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+var words = ["monitor", "program", "application", "keyboard", "mouse", "javascript", "prototype", "functional", "gaming", "network"];
+
+//Start game
+$('.start_game').on('click', function(){
+  $('.game-board.before').hide();
+  shuffle(words);
+  printingWords();
+});
+
+
+  
+//Generate random position
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1));
+}
+
+//Print Word
+var i = -1;
+function  printingWords(){
+
+  i = (i + 1) % words.length;
+  $(".words-block").append('<div id="dump'+i+'" class="gamewords">' + words[i] + '</div>');
+  
+  setTimeout(printingWords , 6000)
+  
+  //For random bg color
+  var colors = ["#C8D6B8","#F6ABB6","#CBCBCB","#46D3F9","#FF594C","#C9D970"];                
+  var randColors = Math.floor(Math.random()*colors.length);           
+  $("#dump"+i).css("background-color", colors[randColors]);
+
+  //for random x-position
+  $("#dump"+i).css({'left': getRandomInt(-50,200)});
+
+  $("#dump"+i).animate({
+    top : '100%'
+  }, 10000, function(){
+    var position = $(".gamewords").position();
+    if(position.top > 270){
+      $('.game-board.after').show();
+    };
+    
+    
+  });
+  
+};
+
+
+//Match Words
+var score= 0;
+function matchWords(){
+  if($('.input-field').val() == $('.gamewords:first-child').text()) {
+      
+      $('.input-field').val("");
+      $('.gamewords:first-child').remove();
+      $('.digit').text(score+=1);
+      var targetedLblScore = $('.mainscore-board .digit').text();
+      if(targetedLblScore >= 10){
+        $('.message-text').text("Level Completed!").show().delay(500).fadeOut();
+        setInterval( function(){
+          $('.game-board.after').show().fadeIn();
+          $('.game-board.after .game-title').text("Congrats! Level Completed");
+          $('.btn.reset_game').text("Play Again");
+        },1000);
+
+      }
+      console.log(targetedLblScore);
+  }
+  else{
+    $('.message-text').text("Wrong word").show().delay(1000).fadeOut();
+    var currentScore = $('.mainscore-board .digit').text();
+    console.log(currentScore);
+    //$('.digit').text(currentScore-=1);
+    $('.input-field').val("");
+      
+  }
+}
+
+$('.input-field').on('keypress', function (e) {
+  if(e.which === 13){
+    matchWords();
+  }
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>Mortgage Loan Calculator</title>
+
+</head>
+<body>
+    <div class="d-flex justify-content-center mt-5">
+        <div id="loancal" class="form-group bg-primary p-3">
+            <h1 class="text-center text-light">Mortgage Loan Calculator</h1>
+            <p>Loan Amount: $<input id="amount" type="number" min="1" max="5000000" onchange="computeLoan()" class="form-control"></p>
+            <p>Interest Rate: %<input id="interest_rate" min="0" max="100" value="10" step=".1" onchange="computeLoan()" class="form-control"></p>
+            <p>Months to Pay: <input id="months" type="number" min="1" max="300" value="1" step="1" onchange="computeLoan()" class="form-control"></p>
+            <h2 id="payment" class="text-warning bg-info p-1"></h2>
+        </div>
+    </div>
+
+    <script>
+        function computeLoan(){
+    const amount = document.querySelector('#amount').value;
+    const interest_rate = document.querySelector('#interest_rate').value;
+    const months = document.querySelector('#months').value;
+    const interest = (amount * (interest_rate * 0.01)) / months;
+    let payment = ((amount / months) + interest).toFixed(2); //calculate monthly payment
+
+    //regedit to add a comma after every three digits
+    payment = payment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //\B looks for a word boundary, ? says what to look for, \d looks for 3 digits in a row
+    document.querySelector('#payment').innerHTML = `Monthly Payment = ${payment}` 
+    
+}
+    </script>
+</body>
+</html>

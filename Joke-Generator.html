@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chuck Norris Joke Generator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+</head>
+<body>
+  <div class="d-flex justify-content-center">
+      <div class="bg-danger p-4">
+      <h2 class="text-center text-info bg-light p-2">Chuck Norris Joke Generator</h2>
+      <form>
+        <div>
+          <label for="number">Number of jokes</label>
+          <input type="number" id="number">
+        </div>
+        <div>
+          <button class="get-jokes btn btn-warning">Get Jokes</button>
+        </div>
+      </form>
+
+      <ul class="jokes text-light"></ul>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script>
+    document.querySelector('.get-jokes').addEventListener('click', getJokes);
+
+// Get Jokes Fun
+function getJokes(e){
+  e.preventDefault();
+
+  let number_holder = document.querySelector('input[type="number"]');
+  const number = (number_holder.value >= 1) ? number_holder.value : 1;
+
+  const xhr = new XMLHttpRequest;
+
+  xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
+
+  xhr.onload = function(){
+    if (this.status === 200) {
+      const jokes = JSON.parse(xhr.responseText);
+      let output = ``;
+      if (jokes.type !== "success") {
+        output = `<li>Something went wrong!</li>`
+      } else {
+        jokes.value.forEach(function(joke, index){
+          output += `
+            <li>${index + 1}: ${joke.joke}</li>
+          `;
+        });
+      }
+      document.querySelector('.jokes').innerHTML = output;
+    }
+  }
+
+  xhr.send();
+}
+  </script>
+</body>
+</html>

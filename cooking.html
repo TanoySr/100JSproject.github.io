@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	
+</head>
+<body>
+	<div class="d-flex justify-content-center">
+		<div class="mt-5 bg-warning p-3">
+			<div>
+				<label>How many teaspoons do you have?</label><br>
+				<input type="text" id="teaspoons">
+				<button id="cal1" class="btn-sm btn-success">Answer</button>
+				<div id="ans1" class="text-danger bg-light"></div>
+				</div>
+			<div>
+				<label>How many cups do you have?</label><br>
+				<input type="text" id="cups">
+				<button id="cal2" class="btn-sm btn-success">Answer</button>
+				<div id="ans2" class="text-danger bg-light"></div>
+			</div>
+			<div>
+				<label>How many teaspoons do you have?</label><br>
+				<input type="text" id="tablespoons">
+				<button id="cal3" class="btn-sm btn-success">Answer</button>
+				<div id="ans3" class="text-danger bg-light"></div>
+			</div>
+			<div>
+				<label>How many tablespoons do you have?</label><br>
+				<input type="text" id="teaspoons2">
+				<button id="cal4" class="btn-sm btn-success">Answer</button>
+				<div id="ans4" class="text-danger bg-light"></div>
+			</div>
+			<div>
+				<label>How many gallons do you have?</label><br>
+				<input type="text" id="gallons">
+				<button id="cal5" class="btn-sm btn-success">Answer</button>
+				<div id="ans5" class="text-danger bg-light"></div>
+			</div>
+	    </div>
+    </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script type="text/javascript">
+ 
+ 	$(document).ready(function(){
+    
+		    $("#cal1").click(function(){
+		        var teaspoons = $("#teaspoons").val();
+		        var cups = function(teaspoons){
+				return teaspoons / 48;
+				}
+		        var cup =("You have " + (cups(teaspoons)).toFixed(2) + " cups.");
+		         $("#ans1").html(cup);
+		    });
+//////////------22222-------///////////
+		   $("#cal2").click(function(){
+		   	var cups = $("#cups").val();
+            var teaspoons = function (cups) {
+			return cups * 48;
+			}
+			var teaspoon = ("You have " + (teaspoons(cups)).toFixed (2) + " teaspoons.");
+			$("#ans2").html(teaspoon);
+		   });
+//////////------33333-------///////////          
+           $("#cal3").click(function(){
+           var teaspoons2 = $("#tablespoons").val();
+           var tablespoons = function (teaspons2) {
+		   return teaspoons2/3
+		   }
+           var tablespoon = ("You have " + (tablespoons(teaspoons2)).toFixed (2) + " tablespoons.");
+           $("#ans3").html(tablespoon);
+           });
+//////////------444444-------///////////  
+           $("#cal4").click(function(){
+           var tablespoons2 = $("#teaspoons2").val();
+           var teaspoons2 = function (tablespoons) {
+			return tablespoons2*3
+			}
+			var teaspoon2 = ("You have " + (teaspoons2(tablespoons)).toFixed (2) + " teaspoons.");
+			$("#ans4").html(teaspoon2);
+           });
+//////////------5555555555-------///////////  
+            $("#cal5").click(function(){
+
+            	var howManyGallons = $("#gallons").val();
+				var cupsFromGallons = function(howManyGallons){
+				  return howManyGallons*16;
+				}
+              var caps2 = ("That's " + (cupsFromGallons(howManyGallons)) + " cups!");
+              $("#ans5").html(caps2);
+            });
+});
+		
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1221 @@
+<HTML>
+<HEAD>
+<TITLE>
+Advanced HTML Editor Pro
+</TITLE>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<style type="text/css">
+	input:hover{
+		height: 40px;
+	}
+</style>
+</HEAD>
+<BODY>
+
+
+<CENTER>
+<div class="d-flex justify-content-center">
+	<div class="bg-warning">
+		<form method="post" action="" name="TABLE"  class="form-group">
+				<table border="3"  class="table table-bordered table-responsive table-sm">
+
+				<tr align="center">
+				<td colspan="6" >
+				<h2 class="text-center text-danger bg-light">Advanced HTML Editor Pro</h2>
+				</td>
+
+				<tr align="center">
+				<td colspan="2" >
+				<input type="button" value=" Start " onClick="START()" class="form-control btn btn-info"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value=" About " onClick="ABOUT()" class="form-control btn btn-info"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="  End  " onClick="END()" class="form-control btn btn-info"><br>
+				</td>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value=" Body " onClick="BODY()" class="form-control btn btn-info"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value="Preview" onClick="PREVIEW(Add)" class="form-control btn btn-info"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td colspan="3"></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value="  Center  " onClick="CENTER()" class="form-control btn btn-info"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value="  /Center  " onClick="UNCENTER()" class="form-control btn btn-info"><br>
+
+
+				<tr>
+				<td colspan="3"></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="6" >
+				<input type="button" value="   P   " class="form-control btn btn-info" onClick="P()"><br>
+
+				<tr align="center">
+				<td colspan="2" >
+				<input type="button" value=" Left P " class="form-control btn btn-info" onClick="LEFTP()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="Center P" class="form-control btn btn-info" onClick="CENTERP()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value=" Right P " class="form-control btn btn-info" onClick="RIGHTP()"><br>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value="  BR  " class="form-control btn btn-info" onClick="BR()"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value="  HR  " class="form-control btn btn-info" onClick="HR()"><br>
+				</td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="2" >
+				<input type="button" value="   B   " class="form-control btn btn-info" onClick="B()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="   I   " class="form-control btn btn-info" onClick="I()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="   U   " class="form-control btn btn-info" onClick="U()"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td >
+				<input type="button" value="   H1  " class="form-control btn btn-info" onClick="H1()"><br>
+				</td>
+				<td >
+				<input type="button" value="   H2  " class="form-control btn btn-info" onClick="H2()"><br>
+				</td>
+				<td >
+				<input type="button" value="   H3  " class="form-control btn btn-info" onClick="H3()"><br>
+				</td>
+				<td >
+				<input type="button" value="   H4  " class="form-control btn btn-info" onClick="H4()"><br>
+				</td>
+				<td >
+				<input type="button" value="   H5  " class="form-control btn btn-info" onClick="H5()"><br>
+				</td>
+				<td >
+				<input type="button" value="   H6  " class="form-control btn btn-info" onClick="H6()"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="6" >
+				<input type="button" value=" Picture " class="form-control btn btn-info" onClick="IMG()"><br>
+				</td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="2" >
+				<input type="button" value="Left Pic" class="form-control btn btn-info" onClick="IMGLEFT()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="Center Pic" class="form-control btn btn-info" onClick="IMGCENTER()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="Right Pic" class="form-control btn btn-info" onClick="IMGRIGHT()"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value="  PRE  " class="form-control btn btn-info" onClick="PRE()"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value="Blockquote" class="form-control btn btn-info" onClick="BLOCKQUOTE()"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value="  Link  " class="form-control btn btn-info" onClick="LINK()"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value=" E-mail " class="form-control btn btn-info" onCLICK="EMAIL()"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value="Table Start" class="form-control btn btn-info" onClick="TABLE()"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value=" Table End " class="form-control btn btn-info" onClick="TABLEEND()"><br>
+				</td>
+				</tr>
+
+				<tr align="center">
+				<td >
+				<input type="button" value="  TR  " class="form-control btn btn-info" onClick="TABLETR()"><br>
+				</td>
+				<td >
+				<input type="button" value=" /TR  " class="form-control btn btn-info" onClick="TABLEUNTR()"><br>
+				</td>
+				<td >
+				<input type="button" value="  TD  " class="form-control btn btn-info" onClick="TABLETD()"><br>
+				</td>
+				<td >
+				<input type="button" value=" /TD  " class="form-control btn btn-info" onClick="TABLEUNTD()"><br>
+				</td>
+				<td >&nbsp;</td>
+				<td >
+				<input type="button" value="  TH  " class="form-control btn btn-info" onClick="TABLETH()"><br>
+				</td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value=" Colspan " class="form-control btn btn-info" onClick="TABLECOLSPAN()"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value=" Rowspan " class="form-control btn btn-info" onClick="TABLEROWSPAN()"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value="Font" class="form-control btn btn-info" onClick="FONT()">
+				</td>
+				<td colspan="3" >
+				<input type="button" value="/Font" class="form-control btn btn-info" onClick="UNFONT()">
+				</td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="2" >
+				<input type="button" value="Font Face" class="form-control btn btn-info" onClick="FONTFACE()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="Font Color" class="form-control btn btn-info" onClick="FONTCOLOR()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="Font Size" class="form-control btn btn-info" onClick="FONTSIZE()"><br>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="1" >
+				<input type="button" value="  OL  " class="form-control btn btn-info" onClick="OL()"><br>
+				</td>
+				<td colspan="1" >
+				<input type="button" value="  /OL  " class="form-control btn btn-info" onClick="UNOL()"><br>
+				</td>
+				<td colspan="1" >
+				<input type="button" value="  UL  " class="form-control btn btn-info" onClick="UL()"><br>
+				</td>
+				<td colspan="1" >
+				<input type="button" value="  /UL  " class="form-control btn btn-info" onClick="UNUL()"><br>
+				</td>
+				<td colspan="1" >
+					<input type="button" value="Button" class="form-control btn btn-info" onClick="FORMBUTTON()"><br>
+				</td>
+				<td colspan="1" >
+				<input type="button" value="  LI  " class="form-control btn btn-info" onClick="LI()"><br>
+				</td>
+
+				<tr>
+				<td></td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="2" >
+				<input type="button" value=" Form " class="form-control btn btn-info" onClick="FORM()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value=" /Form " class="form-control btn btn-info" onClick="UNFORM()"><br>
+				</td>
+				
+				<td colspan="2" >
+				<input type="button" value="Textarea" class="form-control btn btn-info" onClick="TEXTAREA()"><br>
+				</td>
+				
+				</tr>
+
+				<tr align="center">
+				<td colspan="3" >
+				<input type="button" value="Submit" class="form-control btn btn-info" onClick="SUBMIT()"><br>
+				</td>
+				<td colspan="3" >
+				<input type="button" value="Reset" class="form-control btn btn-info" onClick="RESET()"><br>
+				</td>
+				</tr>
+
+				<tr align="center">
+				<td colspan="2" >
+				<input type="button" value="Select" class="form-control btn btn-info" onClick="SELECT()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="Option" class="form-control btn btn-info" onClick="OPTION()"><br>
+				</td>
+				<td colspan="2" >
+				<input type="button" value="/Select" class="form-control btn btn-info" onClick="UNSELECT()"><br>
+				</td>
+				</tr>
+
+
+
+
+
+
+				</table>
+		</form>
+	</div>
+</div>
+<div class="d-flex justify-content-center">
+	<div>
+		<form name="Add" class="form-group">
+			<textarea id="Inputtxt1" class=" form-control bg-warning text-dark" name="write" rows="6" cols="63"  wrap="phisical" > 
+			</textarea>
+			<button onclick="myFunction1()" class="form-control btn btn-primary" >Copy</button>
+       </form>
+       
+	</div>
+</div>
+
+
+
+</center>
+
+<script language="JavaScript">
+
+<!-- 
+function NOTEXT()
+{
+document.Add.write.value += ("")
+}
+// -->
+</script>
+
+
+<script language="JavaScript">
+
+ function myFunction1() {
+             var copyTxt = document.getElementById("Inputtxt1");
+             copyTxt.select();
+             document.execCommand("copy");
+            }
+
+function START()
+{
+  var Start = window.prompt("What is the title for your page?","")
+    if(Start =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<HTML><HEAD><TITLE>" + Start + "</TITLE></head>\n")
+	}
+}
+
+
+
+
+function ABOUT()
+{
+alert("Advanced HTML Editor Pro was written by TSR and is © April 2020 From India.If you wish to use it please send a Thanks")
+}
+
+
+
+
+
+function PREVIEW(Add)
+{
+preview=open("","DisplayWindow","toolbar=no,directories=no,menubar=no,location=no,directories=no");
+preview.document.write(Add.write.value);
+}
+
+
+
+
+function END()
+{
+document.Add.write.value += ("</BODY></HTML>\n")
+}
+
+
+
+
+
+function BODY()
+{
+var BGCOLOR = window.prompt("What do you want the background color to be?","FFFFFF")
+var TEXT = window.prompt("What do you want the text color to be?","000000")
+
+    if(BGCOLOR =='')
+	{
+NOTEXT()
+	}
+    if(TEXT =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+
+document.Add.write.value += ("<body BGCOLOR=" + BGCOLOR + " TEXT=" + TEXT + ">")
+	}
+}
+
+
+
+
+function CENTER()
+{
+document.Add.write.value += ("<CENTER>\n")
+}
+
+
+
+
+function UNCENTER()
+{
+document.Add.write.value += ("</CENTER>\n")
+}
+
+
+
+
+function P()
+{
+  var P = window.prompt("Type in your text for the paragraph:","")
+    if(P =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<P>" + P + "</P>\n")
+	}
+} 
+
+
+
+
+function LEFTP()
+{
+  var LEFTP = window.prompt("Type in your text for the paragraph aligned to the left:","")
+    if(LEFTP =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<P align=left>" + LEFTP + "</P>\n")
+	}
+} 
+
+
+
+function CENTERP()
+{
+  var CENTERP = window.prompt("Type in your text for the paragraph:","")
+    if(CENTERP =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<P align=center>" + CENTERP + "</P>\n")
+	}
+} 
+
+
+
+
+function RIGHTP()
+{
+  var RIGHTP = window.prompt("Type in your text for the Paragraph:","")
+    if(RIGHTP =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<P align=right>" + RIGHTP + "</P>\n")
+	}
+} 
+
+
+
+
+function BR()
+{
+document.Add.write.value += ("<BR>\n")
+}
+
+
+
+
+function HR()
+{
+document.Add.write.value += ("<HR>\n")
+}
+
+
+
+
+
+function B()
+{
+  var B = window.prompt("Type in your Bold here:","")
+    if(B =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<B>" + B + "</B>\n")
+	}
+}
+
+
+
+
+function I()
+{
+  var I = window.prompt("Type in your Italics here:","")
+    if(I =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<I>" + I + "</I>\n")
+	}
+}
+
+
+
+function U()
+{
+  var U = window.prompt("Type in your Underlined here:","")
+    if(U =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<U>" + U + "</U>\n")
+	}
+}
+
+
+
+
+function PRE()
+{
+  var PRE = window.prompt("Type in your Preformatted text here:","")
+    if(PRE =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<PRE>" + PRE + "</PRE> </textarea>\n")
+	}
+}
+
+
+
+
+function H1()
+{
+  var H1 = window.prompt("Heading 1:","")
+    if(H1 =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<H1>" + H1 + "</H1>\n")
+	}
+}
+
+
+
+
+
+function H2()
+{
+  var H2 = window.prompt("Heading 2:","")
+    if(H2 =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<H2>" + H2 + "</H2>\n")
+	}
+}
+
+
+
+
+
+function H3()
+{
+  var H3 = window.prompt("Heading 3:","")
+    if(H3 =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<H3>" + H3 + "</H3>\n")
+	}
+}
+
+
+
+
+
+function H4()
+{
+  var H4 = window.prompt("Heading 4:","")
+    if(H4 =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<H4>" + H4 + "</H4>\n")
+	}
+}
+
+
+
+
+
+function H5()
+{
+  var H5 = window.prompt("Heading 5:","")
+    if(H5 =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<H5>" + H5 + "</H5>\n")
+	}
+}
+
+
+
+
+
+function H6()
+{
+  var H6 = window.prompt("Heading 6:","")
+    if(H6 =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<H6>" + H6 + "</H6>\n")
+	}
+}
+
+
+
+function IMGLEFT()
+{
+  var IMGLEFT = window.prompt("The name for the image to be aligned left:","")
+    if(IMGLEFT =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<img src=" + IMGLEFT + " align=left>\n")
+	}
+}
+
+
+
+function IMG()
+{
+  var IMG = window.prompt("The name for the image:","")
+    if(IMG =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<img src=" + IMG + ">\n")
+	}
+}
+
+
+
+function IMGRIGHT()
+{
+  var IMGRIGHT = window.prompt("The name for the image to be aligned right:","")
+    if(IMGRIGHT =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<img src=" + IMGRIGHT + " align=left>\n")
+	}
+}
+
+
+
+function IMGCENTER()
+{
+  var IMGCENTER = window.prompt("The name for the image to be Centered:","")
+    if(IMGCENTER =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<center><img src=" + IMGCENTER + "></center>\n")
+	}
+}
+
+
+
+
+
+function PRE()
+{
+  var PRE = window.prompt("Enter the text to be Preformatted:","")
+    if(PRE =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<PRE>" + PRE + "</PRE>\n")
+	}
+}
+
+
+
+
+function BLOCKQUOTE()
+{
+  var BLOCKQUOTE = window.prompt("Enter the text for the Blockquote:","")
+    if(BLOCKQUOTE =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<BLOCKQUOTE>" + BLOCKQUOTE + "</BLOCKQUOTE>\n")
+	}
+}
+
+
+
+
+function LINK()
+{
+  var PLACE = window.prompt("Enter the links Location:","")
+  var LINK = window.prompt("Enter the links Name:","")
+    if(PLACE =='')
+	{
+NOTEXT()
+	}
+    if(LINK =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<A HREF=" + PLACE + ">" + LINK + "</A>\n")
+	}
+}
+
+
+
+
+function EMAIL()
+{
+  var EMAIL = window.prompt("Enter your e-mail address:","")
+  var NAME = window.prompt("Enter the text for the address:","")
+    if(NAME =='')
+	{
+NOTEXT()
+	}
+    if(EMAIL =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<A HREF=MAILTO:" + EMAIL + ">" + NAME + "</A>\n")
+	}
+}
+
+
+
+
+function TABLE()
+{
+  var TABLEBORDER = window.prompt("What is the width of the border?:","")
+    if(TABLEBORDER =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<table border=" + TABLEBORDER +">\n")
+	}
+}
+
+
+
+
+function TABLEEND()
+{
+document.Add.write.value += ("</table>\n")
+}
+
+
+
+
+
+function TABLETR()
+{
+document.Add.write.value += ("<TR>\n")
+}
+
+
+
+
+function TABLEUNTR()
+{
+document.Add.write.value += ("</TR>\n")
+}
+
+
+
+
+
+function TABLETD()
+{
+document.Add.write.value += ("<TD>")
+}
+
+
+
+
+function TABLEUNTD()
+{
+document.Add.write.value += ("</TD>\n")
+}
+
+
+
+
+function TABLETH()
+{
+var TABLETH = window.prompt("What is the name for the Table Heading?","")
+    if(TABLETH =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<TH>" + TABLETH +"</TH>\n")
+	}
+}
+
+
+
+
+function TABLECOLSPAN()
+{
+var COLSPAN = window.prompt("How many sections of the table should it go?","")
+    if(COLSPAN =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<td COLSPAN=" + COLSPAN + ">\n")
+	}
+}
+
+
+
+
+function TABLEROWSPAN()
+{
+var ROWSPAN = window.prompt("How many sections down on the table should it go?","")
+    if(ROWSPAN =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<td ROWSPAN=" + ROWSPAN + ">\n")
+	}
+}
+
+
+
+
+function TABLECELLSPACING()
+{
+var CELLSPACING = window.prompt("Enter the number for the Cell Spacing:","")
+    if(CELLSPACING =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<td CELLSPACING=" + CELLSPACING + ">\n")
+	}
+}
+
+
+
+
+function TABLECELLPADDING()
+{
+var CELLPADDING = window.prompt("Insert the nuber for the Cell Padding:","")
+    if(CELLPADDING =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<td CELLPADDING=" + CELLPADDING + ">\n")
+	}
+}
+
+
+
+
+function FONT()
+{
+var FONT = window.prompt("What would you like to put in the font tag?","")
+    if(FONT =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<FONT " + FONT + ">\n")
+	}
+}
+
+
+
+function FONTFACE()
+{
+var FACE = window.prompt("What type of font do you want to use?","")
+    if(FACE =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<FONT FACE=" + FACE + ">\n")
+	}
+}
+
+
+
+
+function FONTCOLOR()
+{
+var COLOR = window.prompt("What color should the text be?","")
+    if(COLOR =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<FONT COLOR=" + COLOR + ">\n")
+	}
+}
+
+
+
+
+function FONTSIZE()
+{
+var SIZE = window.prompt("How big of text?","")
+    if(SIZE =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<FONT SIZE=" + SIZE + ">\n")
+	}
+}
+
+
+
+
+function UNFONT()
+{
+document.Add.write.value += ("</font>\n")
+}
+
+
+
+
+function UL()
+{
+document.Add.write.value += ("<UL>\n")
+}
+
+
+
+
+function UNUL()
+{
+document.Add.write.value += ("</UL>\n")
+}
+
+
+
+
+function OL()
+{
+document.Add.write.value += ("<OL>\n")
+}
+
+
+
+
+function UNOL()
+{
+document.Add.write.value += ("</OL>\n")
+}
+
+
+
+
+function LI()
+{
+var LI = window.prompt("What is the text for this list?","")
+    if(LI =='')
+	{
+NOTEXT()
+	}
+    else
+	{
+document.Add.write.value += ("<LI>" + LI + "</LI>\n")
+	}
+}
+
+
+
+
+
+function FORM()
+{
+var FORMNAME = window.prompt("What is the NAME of the form?","")
+var FORMMETHOD = window.prompt("What is the METHOD for the form?","")
+var FORMACTION = window.prompt("What is the ACTION for the form?","")
+var FORMENCTYPE = window.prompt("What is the ENCTYPE for the form?","text/plain")
+  if(FORMNAME =='')
+	{
+NOTEXT()
+	}
+  if(FORMACTION =='')
+	{
+NOTEXT()
+	}
+  if(FORMENCTYPE =='')
+	{
+NOTEXT()
+	}
+  else
+	{
+document.Add.write.value += ("<FORM NANE=" + FORMNAME + " METHOD=" + FORMMETHOD + " ACTION=" + FORMACTION + " ENCTYPE=" + FORMENCTYPE + ">\n")
+	}
+}
+
+
+
+
+function UNFORM()
+{
+document.Add.write.value += ("</FORM>\n")
+}
+
+
+
+
+
+function TEXTAREA()
+{
+var TEXTAREANAME = window.prompt("What is the name for the Textarea?","Textarea")
+var COLS = window.prompt("How many COLUMNS for the Textarea?","50")
+var ROWS = window.prompt("How many ROWS for the Textarea?","10")
+var TEXTAREAVALUE = window.prompt("What do you want the textarea to say?","")
+  if(TEXTAREANAME =='')
+	{
+NOTEXT()
+	}
+  if(COLS =='')
+	{
+NOTEXT()
+	}
+  if(ROWS =='')
+	{
+NOTEXT()
+	}
+  else
+	{
+document.Add.write.value += ("<TEXTAREA NAME=" + TEXTAREANAME + " ROWS=" + ROWS + " COLS=" + COLS +">\n" + TEXTAREAVALUE + "\n</TEXTAREA>\n")
+	}
+}
+
+
+
+function FORMBUTTON()
+{
+var BUTTONVALUE = window.prompt("What do you want the button to say?","")
+  if(BUTTONVALUE =='')
+	{
+NOTEXT()
+	}
+  else
+	{
+document.Add.write.value += ("<INPUT TYPE=BUTTON VALUE=" + BUTTONVALUE + ">\n")
+	}
+}
+
+
+
+
+function SELECT()
+{
+var SELECT = window.prompt("What is the name of the select field?","")
+  if(SELECT =='')
+	{
+NOTEXT()
+	}
+  else
+	{
+document.Add.write.value += ("<SELECT NAME=" + SELECT + ">\n")
+	}
+}
+
+
+
+
+
+
+
+function OPTION()
+{
+var OPTION = window.prompt("What is the name of the option?","")
+  if(OPTION =='')
+	{
+NOTEXT()
+	}
+  else
+	{
+document.Add.write.value += ("<OPTION>" + OPTION + "</OPTION>\n")
+	}
+}
+
+
+
+
+function UNSELECT()
+{
+document.Add.write.value += ("</SELECT>\n")
+}
+
+
+
+
+
+function SUBMIT()
+{
+var SUBMITVALUE = window.prompt("What do you want the submit button to say?","")
+  if(SUBMITVALUE =='')
+	{
+NOTEXT()
+	}
+  else
+	{
+document.Add.write.value += ("<INPUT TYPE=SUBMIT VALUE=" + SUBMITVALUE + ">\n")
+	}
+}
+
+
+
+
+
+function RESET()
+{
+var RESETVALUE = window.prompt("What do you want the reset button to say?","")
+  if(RESETVALUE =='')
+	{
+NOTEXT()
+	}
+  else
+	{
+document.Add.write.value += ("<INPUT TYPE=RESET VALUE=" + RESETVALUE + ">\n")
+	}
+}
+
+
+</script>
+</body>
+</html>
